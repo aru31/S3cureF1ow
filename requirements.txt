@@ -1,2 +1,5 @@
 Django==2.1.1
+django-qr-code==1.0.0
 pytz==2018.5
+qrcode==6.0
+six==1.11.0
