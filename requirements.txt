@@ -1,5 +1,10 @@
+asn1crypto==0.24.0
+cffi==1.11.5
+cryptography==2.3.1
 Django==2.1.1
 django-qr-code==1.0.0
+idna==2.7
+pycparser==2.19
 pytz==2018.5
 qrcode==6.0
 six==1.11.0

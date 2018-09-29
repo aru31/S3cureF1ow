@@ -11,3 +11,4 @@ class Identity(models.Model):
     address = models.CharField(max_length=1023)
     aadhar_number = models.CharField(max_length=12)
     files = models.FileField()
+    signature = models.CharField(max_length=10000, null=True) 

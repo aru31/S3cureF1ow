@@ -4,9 +4,8 @@
 {% for identit in identity %}
 <p>{{ identit.name }}</p>
 <p>{{ identit.email }}</p>
-<p>{{ identit.email }}</p>
 <p>{{ identit.gender }}</p>
 <p>{{ identit.address }}</p>
-<p>{{ identit.aadhar_number }}<p/>
+<p>{{ identit.aadhar_number }}</p>
 <p><img src="{{ identit.files.url }}" width="300px" height="300px"></p>
 {% endfor %}

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'user',
     'service',
     'qr_code',
+    'cryptography',
 ]
 
 MIDDLEWARE = [
