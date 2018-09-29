@@ -5,5 +5,5 @@ from service import views
 app_name = 'service'
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('qr/', views.index, name='index'),
 ]
