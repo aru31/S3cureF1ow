@@ -6,5 +6,5 @@ app_name = 'service'
 
 urlpatterns = [
     path('qr/', views.index, name='index'),
-    path('qr/data/', views.data, name='data'),
+    path('data/', views.data, name='data'),
 ]
