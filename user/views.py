@@ -11,6 +11,7 @@ from cryptography.hazmat.primitives.asymmetric import padding
 from user.serializers import IdentitySerializer
 from rest_framework import generics
 import json
+import hashlib
 
 # Create your views here.
 
@@ -78,5 +79,5 @@ def generate_identity_sign(pk):
         ),
             hashes.SHA256()
         )
-        identit.signature = signature
+        identit.signature = hashlib.sha256(signature).hexdigest()
         identit.save()
