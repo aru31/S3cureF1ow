@@ -1,11 +1,3 @@
-# Module 2 - Create a Cryptocurrency
-
-# To be installed:
-# Flask==0.12.2: pip install Flask==0.12.2
-# Postman HTTP Client: https://www.getpostman.com/
-# requests==2.18.4: pip install requests==2.18.4
-
-# Importing the libraries
 import datetime
 import hashlib
 import json
@@ -14,7 +6,6 @@ import requests
 from uuid import uuid4
 from urllib.parse import urlparse
 
-# Part 1 - Building a Blockchain
 
 class Blockchain:
 
@@ -96,18 +87,14 @@ class Blockchain:
             return True
         return False
 
-# Part 2 - Mining our Blockchain
 
-# Creating a Web App
 app = Flask(__name__)
 
-# Creating an address for the node on Port 5001
 node_address = str(uuid4()).replace('-', '')
 
-# Creating a Blockchain
+
 blockchain = Blockchain()
 
-# Mining a new block
 @app.route('/mine_block', methods = ['GET'])
 def mine_block():
     previous_block = blockchain.get_previous_block()
@@ -159,7 +146,6 @@ def add_transaction():
 
 # Part 3 - Decentralizing our Blockchain
 
-# Connecting new nodes
 @app.route('/connect_node', methods = ['POST'])
 def connect_node():
     json = request.get_json()
