@@ -68,10 +68,10 @@ class Blockchain:
             block_index += 1
         return True
     
-    def add_transaction(self, sender, receiver, amount):
+    def add_transaction(self, sender, receiver, access):
         self.transactions.append({'sender': sender,
                                   'receiver': receiver,
-                                  'amount': amount})
+                                  'access': access})
         previous_block = self.get_previous_block()
         return previous_block['index'] + 1
     
@@ -114,7 +114,7 @@ def mine_block():
     previous_proof = previous_block['proof']
     proof = blockchain.proof_of_work(previous_proof)
     previous_hash = blockchain.hash(previous_block)
-    blockchain.add_transaction(sender = node_address, receiver = 'Kirill', amount = 1)
+    blockchain.add_transaction(sender = node_address, receiver = 'user', access = 1)
     block = blockchain.create_block(proof, previous_hash)
     response = {'message': 'Congratulations, you just mined a block!',
                 'index': block['index'],
@@ -145,10 +145,10 @@ def is_valid():
 @app.route('/add_transaction', methods = ['POST'])
 def add_transaction():
     json = request.get_json()
-    transaction_keys = ['sender', 'receiver', 'amount']
+    transaction_keys = ['sender', 'receiver', 'access']
     if not all(key in json for key in transaction_keys):
         return 'Some elements of the transaction are missing', 400
-    index = blockchain.add_transaction(json['sender'], json['receiver'], json['amount'])
+    index = blockchain.add_transaction(json['sender'], json['receiver'], json['access'])
     response = {'message': f'This transaction will be added to Block {index}'}
     return jsonify(response), 201
 

@@ -26,17 +26,15 @@ def blockchain(sender, receiver, access):
     API_ENDPOINT6 = "http://0.0.0.0:5002/replace_chain"
     API_ENDPOINT7 = "http://0.0.0.0:5001/get_chain"
     API_ENDPOINT8 = "http://0.0.0.0:5002/get_chain"
-    response1 = requests.post(API_ENDPOINT1, data = {"nodes": ["http://127.0.0.1:5002"]})
-    response2 = requests.post(API_ENDPOINT2, data = {"nodes": ["http://127.0.0.1:5001"]})
-    response3 = requests.post(API_ENDPOINT3, data = {"sender": sender, "receiver": receiver, "access": access})
-    response3 = requests.get(API_ENDPOINT3)
+    response1 = requests.post(API_ENDPOINT1, json = {"nodes": ["http://127.0.0.1:5002"]})
+    response2 = requests.post(API_ENDPOINT2, json = {"nodes": ["http://127.0.0.1:5001"]})
+    response3 = requests.post(API_ENDPOINT3, json = {"sender": sender, "receiver": receiver, "access": access})
     response4 = requests.get(API_ENDPOINT4)
     response5 = requests.get(API_ENDPOINT5)
     response6 = requests.get(API_ENDPOINT6)
     response7 = requests.get(API_ENDPOINT7)
     response8 = requests.get(API_ENDPOINT8)
-    print(response7)
-    print(response8)
+    return (response7.json())
 
 
 class IndexView(LoginRequiredMixin, generic.ListView):
@@ -47,7 +45,7 @@ class IndexView(LoginRequiredMixin, generic.ListView):
         return Identity.objects.all()
 
 
-class SerializerView(LoginRequiredMixin, generics.ListCreateAPIView):
+class SerializerView(generics.ListCreateAPIView):
     model = Identity
     serializer_class = IdentitySerializer
     queryset = Identity.objects.all()
@@ -57,21 +55,16 @@ class SerializerView(LoginRequiredMixin, generics.ListCreateAPIView):
         signature = request.data['signature']
         sender = "institute"
         access = "Yes"
+        receiver = "Arpit"
         for iden in Identity.objects.all():
             if iden.name == name and iden.signature == signature:
-<<<<<<< Updated upstream
-                return HttpResponse("<h1>Access Granted &#128076</h1>")
+                a = blockchain(sender, receiver, access)
+                return HttpResponse("<h1>Access Granted &#128076</h1>" + "Transaction API" + "<br />" + str(a))
             else:
                 return HttpResponse("<h1>The problem you face when you are given too much control &#128532</h1>")
         
-=======
-                blockchain(sender, request.user, access)
-                return HttpResponse("You are now Validated and your block is mined")
-            else:
-                return HttpResponse("You are not verified. Please Try Again")
 
 
->>>>>>> Stashed changes
 def KeyView(request):
     try:
         f = open('private_key.pem', 'rb+')

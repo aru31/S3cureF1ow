@@ -114,12 +114,12 @@ def mine_block():
     previous_proof = previous_block['proof']
     proof = blockchain.proof_of_work(previous_proof)
     previous_hash = blockchain.hash(previous_block)
-    key_file = open('public_key.pem', 'rb')
-    public_key = serialization.load_pem_public_key(
-           key_file.read(),
-           backend=default_backend()
-        )
-    blockchain.add_transaction(sender = node_address, receiver = public_key, access = 1)
+    # key_file = open('public_key.pem', 'rb')
+    # public_key = serialization.load_pem_public_key(
+     #      key_file.read(),
+      #     backend=default_backend()
+       # )
+    blockchain.add_transaction(sender = node_address, receiver = 'user', access = 1)
     block = blockchain.create_block(proof, previous_hash)
     response = {'message': 'Congratulations, you just mined a block!',
                 'index': block['index'],
