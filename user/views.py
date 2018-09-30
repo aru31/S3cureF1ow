@@ -8,6 +8,9 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.serialization import load_pem_private_key
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import padding
+from user.serializers import IdentitySerializer
+from rest_framework import generics
+import json
 
 # Create your views here.
 
@@ -19,6 +22,20 @@ class IndexView(generic.ListView):
         return Identity.objects.all()
 
 
+class SerializerView(generics.ListCreateAPIView):
+    model = Identity
+    serializer_class = IdentitySerializer
+    queryset = Identity.objects.all()
+
+    def post(self, request):
+        name = request.data['name']
+        signature = request.data['signature']
+        for iden in Identity.objects.all():
+            if iden.name == name and iden.signature == signature:
+                return HttpResponse("Sex")
+            else:
+                return HttpResponse("Chutiya kisi aur ko bnayiyo bsdk")
+        
 def KeyView(request):
     private_key = gen_key()
     encode_public_key(private_key)

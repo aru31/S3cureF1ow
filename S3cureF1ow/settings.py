@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'service',
     'qr_code',
     'cryptography',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
